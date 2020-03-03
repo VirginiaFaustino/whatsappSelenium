@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -25,15 +26,26 @@ public class SeleniumExample {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+ 
+
+    @Test()
+    public void browserInitTest() throws InterruptedException {
+        driver.get("https://web.whatsapp.com/");
+        
+        
+    	driver.findElement(By.xpath("//*[@id=\"side\"]/div[1]/div/label/input")).sendKeys("Emmanuel Gomez");
+    	
+    	driver.findElement(By.xpath("//*[@id=\"pane-side\"]/div[1]/div/div/div[3]/div/div/div[2]/div[1]/div[1]/span/span")).click();
+    	
+    	driver.findElement(By.className("_3u328 copyable-text selectable-text")).sendKeys("Hola");
+    	driver.findElement(By.xpath("//*[@id=\"main\"]/footer/div[1]/div[3]")).click();
+        
+
+        Assert.assertEquals(driver.getTitle(),"Google");
+    }
+    
     @AfterClass
     public static void closeBrowser(){
         driver.quit();
-    }
-
-    @Test()
-    public void browserInitTest() {
-        driver.get("https://web.whatsapp.com/");
-
-        Assert.assertEquals(driver.getTitle(),"Google");
     }
 }
